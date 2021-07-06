@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -448,6 +448,10 @@ namespace KtaneWeb
 
                             static IEnumerable<object> iterateNormalFields(Type typeToBeEdited)
                             {
+                                if (typeToBeEdited == typeof(ContributorInfo)) {
+                                    yield return new TR()._(new TD { colspan = 2 }._("Use semicolons to specify multiple people."));
+                                }
+
                                 foreach (var field in typeToBeEdited.GetFields())
                                 {
                                     var attr = field.GetCustomAttribute<EditableFieldAttribute>();
